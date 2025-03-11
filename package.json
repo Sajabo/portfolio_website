@@ -1,0 +1,27 @@
+{
+  "name": "portfolio_website",
+  "version": "1.0.0",
+  "description": "This is my website, showcasing any projects I have as well as my resume.",
+  "main": "tailwind.cofig.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sajabo/portfolio_website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sajabo/portfolio_website/issues"
+  },
+  "homepage": "https://github.com/Sajabo/portfolio_website#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.13"
+  }
+}
