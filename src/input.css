@@ -4,16 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Styles */
 body {
-    background-color: #f3f4f6; /* Light gray background */
+    @apply bg-black text-white text-center p-5; /* Use Tailwind's built-in classes */
     font-family: 'Roboto Mono', monospace;
-    text-align: center;
-    padding: 20px;
+    min-height: 100vh;
 }
 
 h1 {
-    @apply text-3xl font-bold text-blue-600;
+    @apply text-yellow-400 text-2xl font-bold mb-5;
 }
+
 img {
-    width: 100px;
+    width: 500px;
+    border-radius: 10px;
+    display: block; /* Centers the image when using margin auto */
+    margin: 20px auto;
 }
