@@ -38,10 +38,15 @@ shader-art canvas {
     top: 0;
     left: 0;
 }
-
+* {
+    font-weight: bold;
+}
 
 h1 {
-    @apply text-white text-3xl font-bold mb-5;
+    @apply text-white text-3xl mt-10;
+}
+p {
+    @apply text-white text-xl mt-5;
 }
 
 .project-card {
