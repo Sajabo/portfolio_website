@@ -1,3 +1,6 @@
+import { ShaderArt } from 'https://cdn.skypack.dev/shader-art';
+ShaderArt.register();
+
 document.addEventListener("DOMContentLoaded", () => {
     fetch("./src/projects.json") // Adjust path if necessary
         .then(response => response.json())

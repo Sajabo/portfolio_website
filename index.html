@@ -1,25 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link href="src/output.css" rel="stylesheet">  <!-- ✅ Fixed path -->
-    <title>Portfolio</title>
+    <meta charset="UTF-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+    <!-- Links the compiled Tailwind CSS file for styling -->
+    <link href="src/output.css" rel="stylesheet">  
+
+    <title>Portfolio</title>  
 </head>
+
 <body>
+    <shader-art autoplay dpr="1" role="img" tabindex="0" aria-label="A noise animation in red">
+        <script type="buffer" name="position" data-size="2">
+          [-1, 1, -1,-1, 1,1, 1, 1, -1,-1, 1,-1]
+        </script>
+        <script type="buffer" name="uv" data-size="2">
+          [ 0, 0,  0, 1, 1,0, 1, 0,  0, 1, 1, 1]
+        </script>
+        <script type="vert">
+          #version 300 es
+          
+          precision highp float;
+          in vec4 position;
+          in vec2 uv;
+          out vec2 vUv;
+          out vec4 vPosition;
+          void main() {
+            vUv = uv;
+            vPosition = position;
+            gl_Position = position;
+          }
+        </script>
+        <script type="frag">
+          #version 300 es
+          
+          precision highp float;
+          in vec2 vUv;
+          in vec4 vPosition;
+          out vec4 fragColor;
+          uniform vec2 resolution;
+          uniform float time;
+          
+          #define PI 3.141592654
+      
+          vec2 rotate(vec2 p, float a) {
+            return vec2(p.x * cos(a) - p.y * sin(a),
+                    p.x * sin(a) + p.y * cos(a));
+          }
+            
+          float noise(vec2 p) {
+            return .5 + .5 * (
+              sin(p.x * .5 + cos(p.y * 4. + .2 * cos(p.x * 2. + time * .5) + time * .3) + time * .4) * 
+              cos(p.y * .7 + sin(p.x * 3. + .3 * cos(p.y * 2. + time * .6) + time * .4) + time * .7)
+            );
+          }
+          
+          vec3 background() {
+            vec2 p0 = vPosition.xy;
+            float aspectRatio = resolution.x / resolution.y;
+            p0.x *= aspectRatio;
+            vec2 p = rotate(p0.xy * .8, time * .05);
+            
+            float n = (noise(p) + noise(p * 2.) + noise(p * 5.)) / 3.;
+            n = n * sin(n * n * 23. + time * .2);
+            n = clamp(smoothstep(.3, .35, n) - smoothstep(.4, .45, n), 0., 1.);
+            return vec3(.7, .1, .05) * n;
+          }
+          
+          void main() {
+            fragColor = vec4(background(), 1.0);
+          }
+        </script>
+      </shader-art>
+      
+    <!-- Main heading introducing the user -->
     <h1>Hello, I am Sajabo YAY!</h1>
+
+    <!-- Short description -->
     <p>Aspiring Software Engineer</p> 
-    <img src="public/images/ichigo.jpeg" alt="Ichigo">  <!-- ✅ Fixed path -->
-    <!-- Adds a line break between this and Projects-->
+
+    <!-- Adds a block-level paragraph with spacing below -->
     <p class="block mb-4"> BA in Computer Science, Software Development Minor | NMSU '23</p>
 
-    <h1>Projects</h1>
+    <!-- Section for displaying projects -->
+    <h1>PROJECTS</h1>
+    
+    <!-- Empty container where projects will be dynamically added -->
     <div id="projects" class="flex flex-col gap-4"></div>
-    <script src="./src/app.js"></script>
 
+    <!-- Links the JavaScript file that will handle dynamic project loading -->
+    <script type="module" src="./src/app.js"></script>
 </body>
 </html>

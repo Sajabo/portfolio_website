@@ -22,6 +22,7 @@
     "postcss": "^8.5.3"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.13"
+    "@tailwindcss/cli": "^4.0.13",
+    "three": "^0.174.0"
   }
 }
